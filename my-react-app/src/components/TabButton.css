@@ -1,0 +1,26 @@
+button {
+    margin-top: 15px;
+    border-radius: 2rem;
+    border: 2px solid black;
+    /* border cùng màu background */
+    /* rounded-2xl ~ 1rem */
+    background-color: black;
+    /* bg-black */
+    padding: 15px 10px;
+    /* px-8 py-4: 32px horizontal, 16px vertical ~ 1rem=16px */
+    font-weight: 500;
+    /* font-medium */
+    color: white;
+    /* text-white */
+    transition: all 0.3s;
+    /* transition-all duration-300 */
+}
+
+button:hover {
+    transform: translateY(-4px);
+}
+
+.active {
+    background-color: rgb(168, 166, 166);
+    border: 2px solid rgb(168, 166, 166);
+}

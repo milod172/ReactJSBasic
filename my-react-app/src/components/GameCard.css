@@ -1,0 +1,654 @@
+.game-card {
+    perspective: 1000px;
+    width: 300px;
+    height: 460px;
+    position: relative;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s, box-shadow 0.3s;
+    transform-style: preserve-3d;
+    border-radius: 15px;
+}
+
+.card-inner:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+/* Khi flip: thêm class is-flipped, sẽ kết hợp với hover luôn */
+
+.card-inner.is-flipped {
+    transform: rotateY(180deg);
+}
+
+.card-inner.is-flipped:hover {
+    transform: rotateY(180deg) translateY(-8px);
+}
+
+.card-front,
+.card-back {
+    background: linear-gradient(145deg, #2c3e50, #34495e);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+.card-front {
+    border-radius: 15px;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    display: flex;
+    /*Biến game card thành flex container*/
+    flex-direction: column;
+    /* Các phần tử sẽ hiển thị theo chiều từ trên xuống*/
+    flex: 1;
+}
+
+.card-back {
+    transform: rotateY(180deg);
+}
+
+/* Header legendary: cam vàng nổi bật */
+.ultimate .card-header {
+    background: linear-gradient(45deg, #f31225, #780404);
+}
+
+.legendary .card-header {
+    background: linear-gradient(45deg, #f39c12, #e67e22);
+}
+
+/* Header epic: tím */
+.epic .card-header {
+    background: linear-gradient(45deg, #8e44ad, #9b59b6);
+}
+
+/* Header normal: xanh lá */
+.normal .card-header {
+    background: linear-gradient(45deg, #27ae60, #229954);
+}
+
+.card-header {
+    height: 40px;
+    /* cố định chiều cao header */
+    padding: 10px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.card-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover .card-image img {
+    transform: scale(1.05);
+}
+
+.card-description {
+    flex: 1;
+    /* chiếm khoảng trống còn lại */
+    padding: 12px;
+    background: rgba(44, 62, 80, 0.95);
+    color: #ecf0f1;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.4;
+    overflow: hidden;
+    /* tránh tràn */
+}
+
+/* SCROLLABLE SKILL SECTION */
+.card-skill-section {
+    flex: 1;
+    position: relative;
+    background: linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 73, 94, 0.95));
+    overflow: hidden;
+}
+
+.skill-content {
+    padding: 12px;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    color: #ecf0f1;
+    display: flex;
+    flex-direction: column;
+
+    /* Custom scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(52, 152, 219, 0.6) rgba(0, 0, 0, 0.2);
+}
+
+.skill-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.skill-content::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+}
+
+.skill-content::-webkit-scrollbar-thumb {
+    background: rgba(52, 152, 219, 0.6);
+    border-radius: 2px;
+}
+
+.skill-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(52, 152, 219, 0.8);
+}
+
+/* Scroll indicators */
+.scroll-indicator {
+    position: absolute;
+    right: 8px;
+    width: 20px;
+    height: 20px;
+    background: rgba(52, 152, 219, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.scroll-indicator.top {
+    top: 8px;
+    animation: bounce-up 1.5s infinite;
+}
+
+.scroll-indicator.bottom {
+    bottom: 8px;
+    animation: bounce-down 1.5s infinite;
+}
+
+.scroll-indicator.show {
+    opacity: 1;
+}
+
+@keyframes bounce-up {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-3px);
+    }
+
+    60% {
+        transform: translateY(-2px);
+    }
+}
+
+@keyframes bounce-down {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(3px);
+    }
+
+    60% {
+        transform: translateY(2px);
+    }
+}
+
+/* Gradient overlays for scroll indication */
+.scroll-gradient {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 15px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+}
+
+.scroll-gradient.top {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(44, 62, 80, 0.9), transparent);
+}
+
+.scroll-gradient.bottom {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(44, 62, 80, 0.9), transparent);
+}
+
+.scroll-gradient.show {
+    opacity: 1;
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid rgba(52, 152, 219, 0.3);
+}
+
+.skill-icon {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, #282626, #6b6c6c);
+    border-radius: 50%;
+    margin-right: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(52, 152, 219, 0.4);
+    font-size: 12px;
+    color: white;
+}
+
+
+
+.skill-title {
+    font-size: 13px;
+    font-weight: bold;
+    color: #3498db;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.skill-description {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #bdc3c7;
+    margin-bottom: 12px;
+    text-align: left;
+}
+
+.skill-effects {
+    margin-bottom: 12px;
+}
+
+.skill-effect {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+    padding: 4px 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    border-left: 3px solid;
+}
+
+.skill-effect.damage {
+    border-left-color: #e74c3c;
+}
+
+.skill-effect.heal {
+    border-left-color: #27ae60;
+}
+
+.skill-effect.buff {
+    border-left-color: #f39c12;
+}
+
+.skill-effect.debuff {
+    border-left-color: #8e44ad;
+}
+
+.effect-name {
+    font-size: 11px;
+    color: #95a5a6;
+    font-weight: 500;
+}
+
+.effect-value {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.skill-effect.damage .effect-value {
+    color: #e74c3c;
+}
+
+.skill-effect.heal .effect-value {
+    color: #27ae60;
+}
+
+.skill-effect.buff .effect-value {
+    color: #f39c12;
+}
+
+.skill-effect.debuff .effect-value {
+    color: #8e44ad;
+}
+
+.skill-cooldown {
+    position: absolute;
+    top: 8px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #3498db;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    border: 1px solid rgba(52, 152, 219, 0.3);
+    z-index: 10;
+}
+
+.mana-cost {
+    position: absolute;
+    bottom: 8px;
+    right: 30px;
+    background: linear-gradient(45deg, #9b59b6, #8e44ad);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(155, 89, 182, 0.4);
+    z-index: 10;
+}
+
+/* Additional skill sections for long content */
+.skill-combo {
+    margin-bottom: 12px;
+}
+
+.combo-title {
+    font-size: 11px;
+    color: #f39c12;
+    font-weight: bold;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.combo-item {
+    font-size: 10px;
+    color: #bdc3c7;
+    margin-bottom: 2px;
+    padding-left: 8px;
+    position: relative;
+}
+
+.combo-item::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: #f39c12;
+}
+
+.card-stats {
+    display: flex;
+    background: #34495e;
+    border-top: 2px solid #2c3e50;
+}
+
+.stat-column {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+}
+
+.stat-column:not(:last-child) {
+    border-right: 1px solid #2c3e50;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #bdc3c7;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    font-weight: bold;
+}
+
+.stat-value {
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.atk-stat .stat-value {
+    color: #e74c3c;
+}
+
+.health-stat .stat-value {
+    color: #27ae60;
+}
+
+
+/* Mặt sau thẻ bài */
+.game-card-back {
+    width: 260px;
+    height: 360px;
+    background: linear-gradient(145deg, #2c3e50, #34495e);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.game-card-back:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.back-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px 20px;
+    background: linear-gradient(145deg, #2c3e50, #34495e);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pattern nền subtle */
+.back-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        radial-gradient(circle at 40% 60%, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 30px 30px, 25px 25px, 35px 35px;
+    z-index: 1;
+}
+
+.back-content>* {
+    position: relative;
+    z-index: 2;
+}
+
+/* Logo area */
+.back-logo-area {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.logo-circle {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.08));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.2),
+        0 6px 12px rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-inner {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #34495e, #2c3e50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo-symbol {
+    font-size: 28px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+}
+
+/* Decorative patterns */
+.back-pattern {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0;
+}
+
+.pattern-line {
+    width: 45px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Game title */
+.back-title {
+    text-align: center;
+    color: #ecf0f1;
+}
+
+.back-title h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    letter-spacing: 3px;
+    color: #ffffff;
+}
+
+.back-title p {
+    font-size: 13px;
+    color: #bdc3c7;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Card info */
+.back-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+}
+
+.card-number {
+    font-size: 15px;
+    color: #bdc3c7;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    letter-spacing: 1px;
+}
+
+.rarity-badge {
+    padding: 6px 14px;
+    border-radius: 15px;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.rarity-badge.ultimate {
+    background: linear-gradient(45deg, #f31225, #780404);
+    color: white;
+    box-shadow: 0 2px 4px rgba(243, 156, 18, 0.3);
+}
+
+.rarity-badge.legendary {
+    background: linear-gradient(45deg, #f39c12, #e67e22);
+    color: white;
+    box-shadow: 0 2px 4px rgba(243, 156, 18, 0.3);
+}
+
+.rarity-badge.epic {
+    background: linear-gradient(45deg, #8e44ad, #9b59b6);
+    color: white;
+    box-shadow: 0 2px 4px rgba(142, 68, 173, 0.3);
+}
+
+.rarity-badge.normal {
+    background: linear-gradient(45deg, #27ae60, #229954);
+    color: white;
+    box-shadow: 0 2px 4px rgba(39, 174, 96, 0.3);
+}
+
+/* Bottom decoration */
+.back-decoration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.deco-diamond {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 14px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.deco-line {
+    width: 70px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
