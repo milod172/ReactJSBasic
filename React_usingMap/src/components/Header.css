@@ -1,0 +1,95 @@
+.header {
+    background-color: #222;
+    /* Dark background for comic theme */
+    color: #fff;
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* Allow items to wrap on smaller screens */
+}
+
+/* Logo Styles */
+.logo a {
+    color: #e74c3c;
+    /* A vibrant red for the logo */
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+/* Navigation Menu Styles */
+.nav-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-menu li {
+    margin-left: 30px;
+}
+
+.nav-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 17px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #e74c3c;
+    /* Red hover effect */
+}
+
+/* Search Bar Styles */
+.search-bar {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    /* For mobile layout */
+}
+
+.search-bar input {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+    width: 180px;
+    background-color: #333;
+    color: #fff;
+}
+
+.search-bar input::placeholder {
+    color: #bbb;
+}
+
+.search-bar button {
+    background-color: #e74c3c;
+    /* Red search button */
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.search-bar button:hover {
+    background-color: #c0392b;
+    /* Darker red on hover */
+}
