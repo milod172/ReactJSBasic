@@ -1,4 +1,4 @@
-## ⚙️ Một số kiến thức cần biết
+## ⚙️ Một số mẹo cần biết
 
 Dưới đây là một số mẹo và phím tắt quan trọng khi làm việc với Visual Studio Code (VSCode), giúp bạn tăng tốc lập trình và thao tác nhanh hơn.
 
@@ -19,6 +19,5 @@ Dưới đây là một số mẹo và phím tắt quan trọng khi làm việc 
 
 - Dùng `Ctrl + D` để chọn tiếp từ giống từ đang chọn, giúp sửa nhiều chỗ cùng lúc.
 - Mở **Command Palette** bằng `Ctrl + Shift + P` để tìm và chạy lệnh nhanh.
-- Mở terminal tích hợp bằng `Ctrl + \``
 
 ---
