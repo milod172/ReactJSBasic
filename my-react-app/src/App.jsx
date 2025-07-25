@@ -43,7 +43,7 @@ function App() {
         truyền onClose nếu người dụng chọn "Không" sẽ đóng thẻ
         truyền onSelect nếu người dùng chọn "Yes"
       */}
-      {isPopUp && <Modal onClose={handleClose} onSelect={handleSelect} />}
+      {isPopUp && <Modal onNo={handleClose} onYes={handleSelect} />}
 
       {isCurrentCard && <p className='current_card'>Mua thành công thẻ bài: {isCurrentCard}</p>}
 
